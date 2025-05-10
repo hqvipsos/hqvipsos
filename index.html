@@ -64,7 +64,7 @@
       <a href="https://www.instagram.com/cccphq/" target="_blank">https://www.instagram.com/cccphq/</a>
     </p>
     <img src="cccphp.jpg" class="image1">
-    <!---
+    
     <div class="code-block">
       <pre><code id="invitation-code">
 date_format = "%dd_%mm_%YY"
@@ -93,41 +93,53 @@ price_for_date(date_today)
   <div id="footer"></div>
 
   <script>
-    function formatDate(date) {
-      const dd = String(date.getDate()).padStart(2, '0');
-      const mm = String(date.getMonth() + 1).padStart(2, '0');
-      const yyyy = date.getFullYear();
-      return `${dd}_${mm}_${yyyy}`;
-    }
+function updatePrice() {
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2, '0');
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const yyyy = today.getFullYear();
+  const dateStr = `${dd}_${mm}_${yyyy}`;
 
-    function updatePrice() {
-      const today = new Date();
-      const dateStr = formatDate(today);
-      let price = 0;
+  let price = 0;
 
-      const date_1 = ["01_05_2025", "02_05_2025", "03_05_2025", "04_05_2025", "05_05_2025",
-                      "06_05_2025", "07_05_2025", "08_05_2025", "09_05_2025", "10_05_2025",
-                      "11_05_2025", "12_05_2025", "13_05_2025", "14_05_2025", "15_05_2025",
-                      "16_05_2025", "17_05_2025", "18_05_2025", "19_05_2025", "20_05_2025",
-                      "21_05_2025", "22_05_2025", "23_05_2025"];
-      const date_2 = ["24_05_2025", "25_05_2025", "26_05_2025", "27_05_2025"];
-      const date_3 = ["28_05_2025", "29_05_2025", "30_05_2025"];
+  const date_1 = ["01_05_2025", "02_05_2025", "03_05_2025", "04_05_2025", "05_05_2025",
+                  "06_05_2025", "07_05_2025", "08_05_2025", "09_05_2025", "10_05_2025",
+                  "11_05_2025", "12_05_2025", "13_05_2025", "14_05_2025", "15_05_2025",
+                  "16_05_2025", "17_05_2025", "18_05_2025", "19_05_2025", "20_05_2025",
+                  "21_05_2025", "22_05_2025", "23_05_2025"];
+  const date_2 = ["24_05_2025", "25_05_2025", "26_05_2025", "27_05_2025"];
+  const date_3 = ["28_05_2025", "29_05_2025", "30_05_2025"];
 
-      if (date_1.includes(dateStr)) {
-        price = 200;
-      } else if (date_2.includes(dateStr)) {
-        price = 300;
-      } else if (date_3.includes(dateStr)) {
-        price = 400;
-      } else {
-        price = "not available";
-      }
+  if (date_1.includes(dateStr)) {
+    price = 200;
+  } else if (date_2.includes(dateStr)) {
+    price = 300;
+  } else if (date_3.includes(dateStr)) {
+    price = 400;
+  } else {
+    price = "not available";
+  }
 
-      const output = `date_today = "${dateStr}"\n\n# Output: ${price} CZK`;
+  const newText = `
+date_format = "%dd_%mm_%YY"
+date_today = "${dateStr}"
 
-      document.getElementById("invitation-code").innerText =
-        document.getElementById("invitation-code").innerText.replace(/date_today = .*?\n\n# Output: .*?CZK/, output);
-    }
+address = {
+  "street": "Libušská",
+  "number": "46/186",
+  "postal_code": "142 00",
+  "city": "Prague-Libuš"
+}
+
+invited_vip_guests(followed_accounts:
+  "https://www.instagram.com/hqvipsos/following/")
+
+price_for_date(date_today)
+# Output: ${price} CZK
+  `;
+
+  document.getElementById("invitation-code").innerText = newText.trim();
+}
   </script>
     --->
 </body>
