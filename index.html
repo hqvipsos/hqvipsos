@@ -46,7 +46,7 @@
   function getBarColor(percent) {
     const red = Math.min(255, Math.floor((percent / 100) * 255));
     const green = Math.min(255, Math.floor((1 - percent / 100) * 255));
-    return `rgb(${red}, ${green}, 50)`; // немного жёлтого оттенка
+    return `rgb(${red}, ${green}, 50)`;
   }
 
   const remaining = total - claimed;
