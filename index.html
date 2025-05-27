@@ -15,6 +15,64 @@
     
   </style>
 </head>
+
+<script>
+  // Настройка билетов
+  const claimed = 34;
+  const total = 100;
+
+  // Настройка фаз по датам
+  const phases = [
+    { name: "PHASE 1", price: 200, start: "2025-05-01", end: "2025-05-30" },
+    { name: "PHASE 2", price: 300, start: "2025-05-30", end: "2025-06-06" },
+    { name: "PHASE 3", price: 400, start: "2025-06-06", end: "2025-06-13" },
+    { name: "EXTRA", price: 500, start: "2025-06-13", end: "2025-07-01" }
+  ];
+
+  // Функция для определения текущей фазы по дате
+  function getCurrentPhase() {
+    const today = new Date();
+    for (let p of phases) {
+      const start = new Date(p.start);
+      const end = new Date(p.end);
+      if (today >= start && today <= end) return p;
+    }
+    return null;
+  }
+
+  // Рассчёт процентного прогресса
+  const percentTotal = Math.floor((claimed / total) * 100);
+  const barBlocks = Math.floor(percentTotal / 10);
+  const filled = '█'.repeat(barBlocks);
+  const empty = '░'.repeat(10 - barBlocks);
+  const bar = `[ ${filled}${empty} ] ${claimed}/${total} claimed (${percentTotal}%)`;
+
+  // Определяем цвет градиента от зелёного к красному
+  function getBarColor(percent) {
+    const red = Math.min(255, Math.floor((percent / 100) * 255));
+    const green = Math.min(255, Math.floor((1 - percent / 100) * 255));
+    return `rgb(${red}, ${green}, 50)`; // немного жёлтого оттенка
+  }
+
+  const remaining = total - claimed;
+  const text = remaining < 50 ? `Less than ${remaining} tickets left` : `${remaining} tickets left`;
+
+  const phase = getCurrentPhase();
+  const phaseText = phase
+    ? `current phase: ${phase.name} — ${phase.price} CZK`
+    : `current phase: unknown`;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const barEl = document.getElementById("ticket-bar");
+    barEl.innerText = bar;
+    barEl.style.color = getBarColor(percentTotal);
+
+    document.getElementById("ticket-text").innerText = text;
+    document.getElementById("ticket-phase").innerText = phaseText;
+  });
+</script>
+
+
 <body>
   <div id="header"></div> 
 
@@ -50,21 +108,29 @@
     • <a href="https://www.instagram.com/yanihnatola/"> Dj písničky</a><br>
     • <a href="https://www.instagram.com/terrorphoenix/"> terrorphoenix</a>+<a href="https://www.instagram.com/floww1zard/"> Flow Wizard</a><br>
     • <a href="https://www.instagram.com/darko______don/"> Dark0 </a><br>
-      <br>
- <br>
+    <br>
+
+
+  <p id="ticket-bar" style="font-family: monospace;"></p>
+  <p id="ticket-text" style="font-style: italic;"></p>
+  <p id="ticket-phase" style="font-style: italic;"></p>
+    <br>
             
-        (f"The pricefor inviting another person on {VIP30HQ05SOS25} is {invitation_price}
-        as
-          <br>
-         date_1 = ("23_05_2025" to  "31_05_2025")<br>
-         invitation_price = ({200CZK }.)<br>
-       <br>
-         date_2 = ("01_06_2025" to"08_06_2025")<br>
-         invitation_price = ({300CZK }.)<br>
-       <br>
-         date_3 = ("09_06_2025" to "13_06_2025")<br>
-         invitation_price = ({400CZK }.) <br>
-      <br>
+  (f"The pricefor inviting another person on {VIP30HQ05SOS25} is {invitation_price}
+  as
+  <br>
+    date_1 = ("23_05_2025" to  "31_05_2025")<br>
+    invitation_price = ({200CZK }.)<br>
+  <br>
+    date_2 = ("01_06_2025" to"08_06_2025")<br>
+    invitation_price = ({300CZK }.)<br>
+  <br>
+    date_3 = ("09_06_2025" to "13_06_2025")<br>
+    invitation_price = ({400CZK }.) <br>
+  <br>
+      
+
+
       to purchase invitation DM -> 
       <a href="https://www.instagram.com/hqvipsos/" target="_blank">https://www.instagram.com/hqvipsos/</a><br>
     
