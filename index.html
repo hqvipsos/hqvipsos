@@ -49,9 +49,6 @@
     return `rgb(${red}, ${green}, 50)`;
   }
 
-  const remaining = total - claimed;
-  const text = remaining < 50 ? `Less than ${remaining} tickets left` : `${remaining} tickets left`;
-
   const phase = getCurrentPhase();
   const phaseText = phase
     ? `current phase: ${phase.name} — ${phase.price} CZK`
